@@ -69,3 +69,25 @@ func max(a int, b int) int {
 	}
 	return b
 }
+
+// 我的解法
+func lengthOfLongestSubstringLycopene(s string) int {
+	a := make(map[uint8]bool)
+	i, j, maxcnt := 0, -1, 0
+	for ; i < len(s); i++ {
+		if a[s[i]] {
+			for j <= i {
+				j++
+				delete(a, s[j])
+				if s[i] == s[j] {
+					break
+				}
+			}
+		}
+		a[s[i]] = true
+		if maxcnt < i-j {
+			maxcnt = i - j
+		}
+	}
+	return maxcnt
+}
